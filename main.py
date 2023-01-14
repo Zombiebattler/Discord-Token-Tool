@@ -7,13 +7,11 @@ import requests
 import json
 import webbrowser
 
-
 #-------Window------
 root = tk.Tk()
 root.title("DiscordTokenTool")
 root.geometry("400x510")
 root.resizable(width=False, height=False)
-
 
 
 def tokeninfo():
@@ -103,9 +101,11 @@ def payment(token):
     payLine2.set("adress 2: " + f"{response[0]['billing_address']['line_2']}")
     payPostCode.set("Postal Code: " + response[0]['billing_address']['postal_code'])
 
+    
 def url():
     webbrowser.open('https://github.com/Zombiebattler')
 
+    
 def creds():
     top = Toplevel()
     top.title("")
@@ -118,10 +118,6 @@ def creds():
     Label(top).pack()
     tk.Button(top, text="https://github.com/Zombiebattler", command=url).pack()
     Label(top).pack()
-
-
-
-
 
 
 #------Variables------
@@ -142,6 +138,7 @@ payCity = tk.StringVar()
 payState = tk.StringVar()
 payCountry = tk.StringVar()
 payPostCode = tk.StringVar()
+
 
 
 abstand1 = tk.Label(root).pack()
