@@ -45,7 +45,7 @@ def tokeninfo():
         phonevar.set("Phone: "+ f"{response['phone']}")
         verifyvar.set("Verified: "+ f"{response['verified']}")
         MFAvar.set("NSFW: "+ f"{response['nsfw_allowed']}")
-        payment(token=token)
+        payment(token=f"{token}")
 
 
 def tokenLogin():
@@ -109,6 +109,24 @@ def payment(token):
     else:
         payEmail.set("No Payment")
 
+    conections(token=f"{token}")
+
+
+def conections(token):
+    URL = "https://discord.com/api/v9/users/@me/connections"
+
+    head = {
+        "authorization": token
+    }
+
+    response = requests.get(URL, headers=head).json()
+    f = open("Connections.txt", "a")
+    f.write(f"{json.dumps(response, indent=4)}")
+    f.close()
+
+
+    connections.set(f"{response}")
+
 def url():
     webbrowser.open('https://github.com/Zombiebattler')
 
@@ -148,6 +166,7 @@ payCity = tk.StringVar()
 payState = tk.StringVar()
 payCountry = tk.StringVar()
 payPostCode = tk.StringVar()
+connections = tk.StringVar()
 
 
 abstand1 = tk.Label(root).pack()
@@ -185,6 +204,7 @@ PayPostCode = tk.Label(root, textvariable=payPostCode, fg="green").pack()
 PayCity = tk.Label(root, textvariable=payCity, fg="green").pack()
 PayLine1 = tk.Label(root, textvariable=payLine1, fg="green").pack()
 PayLine2 = tk.Label(root, textvariable=payLine2, fg="green").pack()
+
 
 cred = tk.Button(root, text="Credits", width=60, command=creds)
 cred.pack()
